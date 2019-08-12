@@ -1,0 +1,22 @@
+这是一个迷你shell  
+   1. 不断地等待接收键盘的输入（字符串）
+   2.创建子进程
+   3.程序替换
+#include<stdio.h>
+#include<stdlib.h>
+#include<untsid.h>
+#include<string.h>
+int main()
+{
+   while(1)
+   {
+       printf("minishell:");   
+       fflush(stdout);
+       char cmd[1024] = {0};
+       if(scanf("%[^\n]%*c",cmd)!=1){
+       getchar();
+       }
+                 
+   }
+
+}
