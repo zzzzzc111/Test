@@ -1,0 +1,67 @@
+基本需求：
+1.有一个题目的列表页面
+2.点击某个具体题目 跳转到一个题目详情页的页面
+    详情页包含的内容
+    a 题目的要求
+    b 代码的编辑框
+    c 提交代码后的结果
+
+模块划分
+1.在线编译器：把网页的代码内容提交到服务器上 进行编译 运行 验证
+2.题目管理模块：管理当前系统上所有的OJ题目 （包括题目的具体要求）能够和网页端进行交互 获取到所有的题目列表以及某个题目的详细情况
+
+在线编译器模块的实现
+    此模块的核心：完成“在线”，如何把代码通过网页提交到服务器上 服务器调用g++完成编译过程 并且调用刚生成的可执行程序 验证程序结果
+
+搭建一个HTTP服务器来完成在线编译的核心功能
+借助第三方库来快速搭建 20行代码
+
+
+
+
+在线编译模块API设定
+HTTP请求是啥样的格式（包含哪些信息），HTTP响应啥样的（包含哪些信息）
+
+请求：
+1.代码     code                                                                                 请求示例：
+2.标准输入的内容   stdin                                                                   {
+响应：                                                                                                  “code”：“#include...”,
+1.error,0 正确编译运行， 1.编译出错 2.运行出错 3.其他错误                       “stdin”：“hello”，
+2.reason，错误原因 如果error为0 reason就是空字符串                        }
+3.标准输出    stdout                                                                         响应示例：
+4.标准错误     stderr                                                                         {
+                                                                                                            “error”：“0”，
+使用json格式组织请求和响应。                                                                “reason”：“”， 
+                                                                                                             “stdout”：“hello”，
+JSON 一种数据组织格式（一种序列化的方法）                                           “stderr”：“”，
+{                                                                                                     }
+    “name”:"曹操"，
+    “skill1”：“三段跳”，
+     “skill2”：“剑气”，                                                                 浏览器实际提供的格式
+}                                                                                                      code=#include...&stdin=hello
+                                                                                                       urlenclude
+
+Windows可执行程序格式 PE
+Linux可执行程序格式 ELF
+
+
+execl
+execlp
+execle
+
+execv
+execvp
+execve
+
+
+http协议中哪些部分可以带有用户自定制的数据？
+1.URL后面的参数（键值对的方式）
+2.header部分
+3.body，
+
+容器：
+vector:数组
+list：链表
+map（key->value）/set（key）：二叉搜索树
+unordered_map(key-value)/unordered_set(key)：哈希表
+unordered_map
